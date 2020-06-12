@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
+import React,{ Component } from 'react';
 import './App.css';
+// import ContactForm from './components/contactform/index'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Todos from './components/todos/index'
+import AddTodo from './components/addform/index'
+
+
+class App extends Component {
+
+  state = {
+    todos:[]
+  }
+
+  deleteTodoItem = (id)=>{
+    console.log(id)
+    const todos = this.state.todos.filter( todo =>{
+      return todo.id !== id
+    })
+    this.setState({
+      todos
+    })
+  }
+
+  addTodo = (todo)=>{
+    todo.id = Math.random()
+    let todos = [...this.state.todos,todo]
+    this.setState({
+      todos
+    })
+  }
+
+  render(){
+    return(
+      <div className="todo-app container">
+        <AddTodo addTodo= {this.addTodo}/>
+        <h1 className="center blue-text">Your Todo List</h1>
+        <Todos  todos={this.state.todos} deleteTodoItem={this.deleteTodoItem}/>
+      </div>
+    )
+  }
 }
 
 export default App;
