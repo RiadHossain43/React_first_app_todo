@@ -24,6 +24,7 @@ class AddTodo extends Component{
                 <form onSubmit={this.handleSubmit}>
                     <label>Add New To do:</label>
                     <input type="text" onChange={this.handleChange} value={this.state.content}/>
+                    <button className="waves-effect waves-light btn">ADD</button>
                 </form>
             </div>
         )
